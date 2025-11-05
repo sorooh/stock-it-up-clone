@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>
+      {% block title %}Welkom - Stock It Up Clone - Dashboard{% endblock %}
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet" />
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/new_css/variables.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/standards.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/new_css/pages/sellfiller/base.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/new_css/components/grid.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/new_css/components/buttons.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/sidebar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/search.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/alerts.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/card.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/new_css/components/progressbar.css' %}" />
+
+    <link href="{% static 'favicon.ico' %}" type="image/x-icon" rel="icon" />
+    <link rel="stylesheet" href="{% static 'css/font-awesome-line-awesome.css' %}" />
+
+    
+  <link rel="stylesheet" href="{% static 'css/new_css/pages/welcome/welcome.css' %}" />
+
+  <style>
+    .app_layout__navbar{
+      background: #EEF7FB!important;
+    }
+  </style>
+
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}" />
+    <link rel="manifest" href="{% static 'manifest/manifest.json' %}" />
+
+    <meta property="og:title" content="Stock It Up Clone" />
+    <meta property="og:description" content="Multi-channel e-commerce management platform" />
+    <meta property="og:image" content="{% static 'logos/STOCKitUP_logo40.png' %}" />
+    <meta property="og:url" content="{% url 'home' %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stock It Up Clone 👑 alles-in-een verkopertool" />
+
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body class="position-relative">
+    <!-- Empty startup banner template -->
+<div id="startup-banner"></div>
+
+    <div id="outer-bar">
+      <div id="inner-bar"></div>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" class="polite_modal">
+      <div class="toast-container"></div>
+    </div>
+
+    <div class="app_layout container-fluid" id="outer-container">
+      <div class="row app_layout__inner">
+        <!-- Sidebar START -->
+        <div class="col-auto app_layout__sidebar">
+          <div id="sidebar" class="show collapse collapse-horizontal">
+            <div id="sidebar-nav">
+              <!-- Sidebar-nav top -->
+              <div class="sidebar-nav__top">
+                <div class="siu-logo">
+                  <img src="{% static 'logo.png' %}" />
+                </div>
+                <form id="global-search-form">
+                  <button type="submit" disabled aria-hidden="true"></button>
+                  <div class="col">
+                    <div class="relative">
+                      <input autocomplete="off" type="text" id="sidebar-search-input" placeholder="Zoeken..." name="query" data-function="input->global_search" />
+                    </div>
+                  </div>
+                </form>
+                <div class="sidebar_main_items">
+                  
+                </div>
+
+                <div class="responsive_menu">
+                  
+                    <span class="responsive_menu__item" data-bs-toggle="collapse" data-bs-target="#collapseVoorraad" aria-expanded="false" aria-controls="collapseVoorraad">
+                      <a class="btn ">Voorraad</a>
+                      <i class="siu-icon/siu-icon-large siu-arrow-down"></i>
+                    </span>
+                    <div class="collapse" id="collapseVoorraad">
+                      <ul>
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:inventory' %}">Producten</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:offers-no-product' %}">Offers</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'warehouses:list' %}">Magazijnen</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:mutations-new' %}">Mutaties</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:attributes' %}">Attributen</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:delivery-times' %}">Levertijden</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:consolidation' %}">Consolidatie</a>
+                            </li>
+                          
+                        
+                      </ul>
+                    </div>
+                  
+                    <span class="responsive_menu__item" data-bs-toggle="collapse" data-bs-target="#collapseBestellingen" aria-expanded="false" aria-controls="collapseBestellingen">
+                      <a class="btn ">Bestellingen</a>
+                      <i class="siu-icon/siu-icon-large siu-arrow-down"></i>
+                    </span>
+                    <div class="collapse" id="collapseBestellingen">
+                      <ul>
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:items' %}">Bestellingen</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:batches' %}">Batches</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:shipments' %}">Verzendingen</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:prints' %}">Labels</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:fulfillers' %}">Fulfillers</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:returns' %}">Retouren</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'orders:invoice-templates' %}">Facturen</a>
+                            </li>
+                          
+                        
+                      </ul>
+                    </div>
+                  
+                    <span class="responsive_menu__item" data-bs-toggle="collapse" data-bs-target="#collapsePrestaties" aria-expanded="false" aria-controls="collapsePrestaties">
+                      <a class="btn ">Prestaties</a>
+                      <i class="siu-icon/siu-icon-large siu-arrow-down"></i>
+                    </span>
+                    <div class="collapse" id="collapsePrestaties">
+                      <ul>
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'analytics:home' %}">Home</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'analytics:products' %}">Producten</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'analytics:channels' %}">Kanalen</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'analytics:reports' %}">Rapporten</a>
+                            </li>
+                          
+                        
+                      </ul>
+                    </div>
+                  
+                    <span class="responsive_menu__item" data-bs-toggle="collapse" data-bs-target="#collapseInkopen" aria-expanded="false" aria-controls="collapseInkopen">
+                      <a class="btn ">Inkopen</a>
+                      <i class="siu-icon/siu-icon-large siu-arrow-down"></i>
+                    </span>
+                    <div class="collapse" id="collapseInkopen">
+                      <ul>
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:purchase-products' %}">Producten</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:purchase-suggestions' %}">Suggesties</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:purchase-ordered' %}">Verwacht</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:purchase-completed' %}">Afgewerkt</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:purchase-snoozed' %}">Snoozed</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:suppliers' %}">Leveranciers</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'products:purchase-settings' %}">Instellingen</a>
+                            </li>
+                          
+                        
+                      </ul>
+                    </div>
+                  
+                    <span class="responsive_menu__item" data-bs-toggle="collapse" data-bs-target="#collapseKoppelingen" aria-expanded="false" aria-controls="collapseKoppelingen">
+                      <a class="btn ">Koppelingen</a>
+                      <i class="siu-icon/siu-icon-large siu-arrow-down"></i>
+                    </span>
+                    <div class="collapse" id="collapseKoppelingen">
+                      <ul>
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'channels:connections' %}">Kanalen</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'channels:transporters' %}">Vervoerders</a>
+                            </li>
+                          
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'channels:shipment-configs' %}">Verzendconfiguraties</a>
+                            </li>
+                          
+                        
+                      </ul>
+                    </div>
+                  
+                    <span class="responsive_menu__item" data-bs-toggle="collapse" data-bs-target="#collapseMarketing" aria-expanded="false" aria-controls="collapseMarketing">
+                      <a class="btn ">Marketing</a>
+                      <i class="siu-icon/siu-icon-large siu-arrow-down"></i>
+                    </span>
+                    <div class="collapse" id="collapseMarketing">
+                      <ul>
+                        
+                          
+                            <li>
+                              <a class="fine-print" href="{% url 'core:marketing-emails' %}">Emails</a>
+                            </li>
+                          
+                        
+                      </ul>
+                    </div>
+                  
+                </div>
+              </div>
+              <div class="sidebar-nav__bottom">
+                <!-- Bottom items -->
+                <div class="bottom-items">
+                  <a class="mt-auto" href="{% url 'core:settings-general' %}">
+                    <img src="{% static 'css/icons/cog.svg' %}" alt="Cog Icon" />
+                    <p>Instellingen</p>
+                  </a>
+                  
+                </div>
+
+                <!-- User account -->
+                <div class="user-account" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
+                  <!-- User account items -->
+                  <div class="collapse" id="collapseUser">
+                    <ul>
+                      
+
+                      <li>
+                        <a href="{% url 'onboarding:welcome' %}">Welkom</a>
+                      </li>
+
+                      <li>
+                        <a href="{% url 'auth:logout' %}">Log uit</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="user-account_bottom">
+                    <img class="new_icon" src="{% static 'css/icons/user.svg' %}" alt="User Icon" />
+                    <div class="user-account__inner">
+                      <div class="name body-default">{{ user.email }}</div>
+                      
+                    </div>
+                    <img src="{% static 'css/icons/chevron_up_small.svg' %}" alt="Chevron Up" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Sidebar END -->
+
+        <!-- Navbar START -->
+        <div class="app_layout__navbar col">
+          <div class="app_layout__navbar__inner">
+            <div class="vw-mobile-header">
+              <div id="search-results"></div>
+              <nav class="navbar">
+                <div class="container-fluid navbar__inner">
+                  <div class="navbar__first">
+                    <div data-function="click->toggle_sidebar">
+                      <img src="{% static 'css/icons/navbar_toggler.svg' %}" alt="Toggler" />
+                    </div>
+                    <div class="nav_branding" id="navbarCollapse">
+                      
+                        <a tabindex="-1" href="{% url 'dashboard' %}" data-siu="click->navigate">
+                          
+                          <img src="{% static 'logo.png' %}" />
+                        </a>
+                      
+                    </div>
+                    <div class="navbar__text" id="navbarText">
+                      <ul>
+                        
+                          <li>
+                            <a tabindex="-1" class="" href="{% url 'products:inventory' %}">Voorraad</a>
+                          </li>
+                         
+                          <li>
+                            <a tabindex="-1" class="" href="{% url 'orders:items' %}">Bestellingen</a>
+                          </li>
+                         
+                          <li>
+                            <a tabindex="-1" class="" href="{% url 'analytics:home' %}">Prestaties</a>
+                          </li>
+                         
+                          <li>
+                            <a tabindex="-1"
+                              class=" position-relative"
+                              href="{% url 'products:purchase-products' %}">
+                              Inkopen
+                            </a>
+                          </li>
+                         
+                          <li>
+                            <a tabindex="-1" class="" href="{% url 'core:marketing-emails' %}">Marketing</a>
+                          </li>
+                         
+                          <li>
+                            <a tabindex="-1" class="" href="{% url 'channels:connections' %}">Koppelingen</a>
+                          </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="navbar__end">
+                    <!--  <span
+                      id="present-user-indicator"
+                      class="mx-3 d-none"
+                    ></span>  -->
+                    <!--     -->
+                    
+                    <span id="bell-wrapper"><a
+  class="siu-icon siu-custom-bell-topbar-1"
+  id="bell-topbar"
+  data-function="click->show_notifications"
+>
+</a></span>
+                    <div id="notifications-div" hidden></div>
+                  </div>
+                </div>
+              </nav>
+
+              <div id="chest">
+                <!-- <div class="row" id="page_header"></div> -->
+                <div id="tiddy" style="position: relative">
+                    
+                {% block content %}
+<section id="welcome">
+  <div class="container-fluid">
+    <div class="desktop_view_welcome">
+      <div class="desktop_view_welcome__inner">
+        <div class="desktop_view_welcome__content">
+          <img src="{% static 'jaw/img/kate.png' %}" alt="Welkom bij Stock It Up Clone!">
+          <h1>Welkom bij Stock It Up Clone!</h1>
+          <p class="body-bold">Voordat we aan de slag kunnen moeten we wat basisgegevens in het systeem zetten.</p>
+          <button class="btn btn-primary" data-welkom-navigate="{% url 'onboarding:addresses' %}" type="button">Beginnen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+                {% endblock %}
+
+                </div>
+                <div id="feedback_modals">
+                  
+                </div>
+                <div id="content_modal"></div>
+              </div>
+            </div>
+            <script>
+              window.pick_mode = ''
+            </script>
+            
+            {% csrf_token %}
+            <script>
+              // Add CSRF token to all AJAX requests
+              const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+              window.csrfToken = csrftoken;
+              
+              // jQuery CSRF setup
+              if (typeof $ !== 'undefined') {
+                $.ajaxSetup({
+                  beforeSend: function(xhr, settings) {
+                    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                  }
+                });
+              }
+            </script>
+            
+            <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+            <script src="{% static 'js/popper.min.js' %}"></script>
+            <!-- <script src="{% static 'bootstrap-5.2.2/dist/js/bootstrap.bundle.min.js' %}"></script> -->
+            <script src="{% static 'js/Chart.min.js' %}"></script>
+            <script src="{% static 'lottie/lottieplayer.js' %}"></script>
+            
+            <script src="{% static 'js/react.production.js' %}"></script>
+            <script src="{% static 'js/react-dom.production.js' %}"></script>
+            
+
+            <script>
+              // Ensure React is available globally for non-AMD scripts
+              if (typeof window.React === 'undefined' && typeof React !== 'undefined') {
+                window.React = React;
+              }
+              if (typeof window.ReactDOM === 'undefined' && typeof ReactDOM !== 'undefined') {
+                window.ReactDOM = ReactDOM;
+              }
+            </script>
+
+            
+            <script src="{% static 'js/stockitup.js' %}"></script>
+            <script src="{% static 'js/siu_new.js' %}"></script>
+            
+
+            
+<script src="{% static 'js/welkom.js' %}"></script>
+
+            {% block extra_js %}{% endblock %}
+          </div>
+        </div>
+        <!-- Navbar END -->
+      </div>
+    </div>
+    <div id="disconnection-cover" class="display-3 text-primary fw-bold" style="
+        left: 0;
+        top: 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 99999999;
+        background-color: rgba(21, 73, 124, 0.4);
+        display: none;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      ">⌛ Wachten op verbinding...</div>
+
+    
+  </body>
+</html>
